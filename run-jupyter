@@ -1,0 +1,19 @@
+#!/bin/bash
+
+while getopts e: flag
+do
+    case "${flag}" in
+        e) environment=${OPTARG};;
+    esac
+done
+
+shift $(($OPTIND - 1))
+
+if [ $environment ]
+then
+    source $environment/bin/activate
+else
+    source ~/tmp/venv/bin/activate
+fi
+
+jupyter lab $1
